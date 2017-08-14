@@ -1,3 +1,5 @@
+package com.bobocode;
+
 import org.postgresql.ds.PGSimpleDataSource;
 
 import javax.sql.DataSource;
@@ -21,7 +23,7 @@ import java.sql.Statement;
  * - Create statement
  * - Execute statement
  */
-public class JdbcExample_01 {
+public class PrintDatabaseTables {
     //todo: don't forget to specify your db properties
     static String url = "jdbc:postgresql://localhost:5432/bobocode_db";
     static String user = "bobouser";
