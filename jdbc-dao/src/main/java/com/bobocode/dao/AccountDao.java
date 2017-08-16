@@ -10,4 +10,6 @@ public interface AccountDao {
     Account find(Long id);
 
     List<Account> findAll();
+
+    void update(Account account);
 }
