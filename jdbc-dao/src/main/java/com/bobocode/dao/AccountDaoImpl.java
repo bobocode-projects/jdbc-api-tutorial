@@ -36,7 +36,7 @@ public class AccountDaoImpl implements AccountDao {
         preparedStatement.setString(1, account.getFirstName());
         preparedStatement.setString(2, account.getLastName());
         preparedStatement.setString(3, account.getEmail());
-        preparedStatement.setDate(4, Date.valueOf(account.getCreationDate().toLocalDate()));
+        preparedStatement.setDate(4, Date.valueOf(account.getBirthday()));
         preparedStatement.setBigDecimal(5, account.getBalance());
         preparedStatement.setDate(6, Date.valueOf(account.getCreationDate().toLocalDate()));
 

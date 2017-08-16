@@ -13,6 +13,7 @@
         <module>jdbc-dao</module>
         <module>jdbc-util</module>
         <module>jdbc-sql</module>
+        <module>jdbc-sql-stream-task</module>
     </modules>
 
     <properties>
