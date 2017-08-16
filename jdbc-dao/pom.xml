@@ -9,8 +9,19 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>jdbc-hello-world</artifactId>
+    <artifactId>jdbc-dao</artifactId>
+
     <dependencies>
+        <dependency>
+            <groupId>com.bobocode</groupId>
+            <artifactId>account-model</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.bobocode</groupId>
+            <artifactId>test-data-provider</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>com.bobocode</groupId>
             <artifactId>jdbc-util</artifactId>
