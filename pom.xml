@@ -10,6 +10,9 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>jdbc-hello-world</module>
+        <module>jdbc-dao</module>
+        <module>jdbc-util</module>
+        <module>jdbc-sql</module>
     </modules>
 
     <properties>

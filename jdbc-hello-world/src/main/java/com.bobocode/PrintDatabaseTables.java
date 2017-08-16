@@ -1,5 +1,6 @@
 package com.bobocode;
 
+import com.bobocode.util.DbUtil;
 import org.postgresql.ds.PGSimpleDataSource;
 
 import javax.sql.DataSource;
@@ -7,6 +8,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.stream.Stream;
 
 /**
  * Basic JDBC API example. This is the simples example of using JDBC API. Please note that Java SE includes JDBC API,
@@ -31,7 +33,7 @@ public class PrintDatabaseTables {
 
     public static void main(String[] args) throws SQLException {
 
-        DataSource dataSource = createDataSource(url, user, pass);
+        DataSource dataSource = DbUtil.getDataSource();
 
         printPublicTables(dataSource);
     }
@@ -41,20 +43,10 @@ public class PrintDatabaseTables {
         try (Connection connection = dataSource.getConnection()) {
             Statement statement = connection.createStatement();
             String sql = "SELECT table_name FROM information_schema.tables WHERE table_schema='public' AND table_type='BASE TABLE';";
-
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                 System.out.println(resultSet.getString(1));
             }
         }
-    }
-
-    private static DataSource createDataSource(String url, String username, String pass) {
-        // Creates simple basic data source with one physical connection
-        PGSimpleDataSource dataSource = new PGSimpleDataSource();
-        dataSource.setUrl(url);
-        dataSource.setUser(username);
-        dataSource.setPassword(pass);
-        return dataSource;
     }
 }

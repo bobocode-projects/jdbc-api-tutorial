@@ -1,0 +1,11 @@
+DROP TABLE IF EXISTS account;
+
+CREATE TABLE account(
+  id SERIAL PRIMARY KEY,
+  first_name VARCHAR(255) NOT NULL,
+  last_name VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  birthday TIMESTAMP NOT NULL,
+  balance NUMERIC(20,2) NOT NULL DEFAULT 0.0,
+  creation_date TIMESTAMP NOT NULL DEFAULT now()
+);
