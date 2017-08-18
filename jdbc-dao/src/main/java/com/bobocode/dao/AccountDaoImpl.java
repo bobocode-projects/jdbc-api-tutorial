@@ -108,8 +108,7 @@ public class AccountDaoImpl implements AccountDao {
 
     private Account parseRow(ResultSet rs) throws SQLException {
         Account account = new Account();
-        Long l = rs.getLong("id");
-        account.setId(l);
+        account.setId(rs.getLong(1));
         account.setFirstName(rs.getString(2));
         account.setLastName(rs.getString(3));
         account.setEmail(rs.getString(4));
