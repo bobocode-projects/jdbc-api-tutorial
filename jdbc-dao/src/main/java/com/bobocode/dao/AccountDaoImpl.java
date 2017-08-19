@@ -63,17 +63,12 @@ public class AccountDaoImpl implements AccountDao {
     @Override
     public Account find(Long id) {
         try (Connection connection = dataSource.getConnection()) {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM account WHERE id=" + id + ";");
-
-            if (resultSet.next()) {
-                return parseRow(resultSet);
-            } else {
-                throw new DaoOperationException("We didn't found account for this id: "+id);
-            }
-
+            ResultSet resultSet = connection.createStatement()
+                    .executeQuery("SELECT * FROM account WHERE id=" + id + ";");
+            resultSet.next();
+            return parseRow(resultSet);
         } catch (SQLException e) {
-            throw new DaoOperationException("We didn't found account for this id: "+id);
+            throw new DaoOperationException("Something went wrong with id: " + id);
         }
     }
 
