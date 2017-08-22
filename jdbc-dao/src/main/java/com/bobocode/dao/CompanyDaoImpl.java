@@ -57,9 +57,9 @@ public class CompanyDaoImpl implements CompanyDao {
     @Override
     public List<Company> findAll() {
         try (Connection connection = dataSource.getConnection()) {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM company;");
-            return collectToList(resultSet);
+            return collectToList(connection
+                    .createStatement()
+                    .executeQuery("SELECT * FROM company;"));
         } catch (SQLException e) {
             throw new DaoOperationException(e.getMessage());
         }
@@ -86,11 +86,18 @@ public class CompanyDaoImpl implements CompanyDao {
     @Override
     public List<Company> findByName(String name) {
         try (Connection connection = dataSource.getConnection()) {
-            return collectToList(connection
-                    .createStatement()
-                    .executeQuery("SELECT * FROM company WHERE name='" + name + "';"));
+            return collectToList(
+                    prepareFindByNameStatement(connection, name)
+                            .executeQuery());
         } catch (SQLException e) {
             throw new DaoOperationException("Didn't found company.", e);
         }
+    }
+
+    private PreparedStatement prepareFindByNameStatement(Connection connection, String name) throws SQLException {
+        PreparedStatement ps = connection.prepareStatement(
+                "SELECT * FROM company WHERE name=?;");
+        ps.setString(1, name);
+        return ps;
     }
 }

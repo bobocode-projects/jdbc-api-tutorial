@@ -63,14 +63,25 @@ public class AccountDaoImpl implements AccountDao {
     @Override
     public Account find(Long id) {
         try (Connection connection = dataSource.getConnection()) {
-            ResultSet resultSet = connection.createStatement()
-                    .executeQuery("SELECT * FROM account WHERE id=" + id + ";");
-            resultSet.next();
-            return parseRow(resultSet);
+            return isResultSet(prepareFindByIdStatement(connection, id)
+                    .executeQuery());
         } catch (SQLException e) {
-            throw new DaoOperationException("Something went wrong with id: " + id);
-//            throw new DaoOperationException(e.getMessage());
-//            throw new DaoOperationException(e.getStackTrace());
+            throw new DaoOperationException("Something went wrong with id: " + id, e);
+        }
+    }
+
+    private PreparedStatement prepareFindByIdStatement(Connection connection, Long id) throws SQLException {
+        PreparedStatement ps = connection.prepareStatement(
+                "SELECT * FROM account WHERE id=?;");
+        ps.setLong(1, id);
+        return ps;
+    }
+
+    private Account isResultSet(ResultSet resultSet) throws SQLException {
+        if (resultSet.next()) {
+            return parseRow(resultSet);
+        } else {
+            throw new DaoOperationException("Result set is empty.");
         }
     }
 
