@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>jdbc-hello-world</artifactId>
+    <artifactId>jdbc-basics</artifactId>
     <dependencies>
         <dependency>
             <groupId>com.bobocode</groupId>
