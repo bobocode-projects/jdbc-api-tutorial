@@ -1,8 +1,3 @@
-# JDBC API, and SQL examples
+# <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=50/>JDBC API, and SQL tutorial
 
-This repository includes basic code examples of JDBC API usage 
-
-Covered topics:
-   * JDBC API
-        * DataSource types 
-   * SQL
+The list of tutorials on JDBC API features and SQL
