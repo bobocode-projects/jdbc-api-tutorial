@@ -1,34 +1,22 @@
 package com.bobocode;
 
-import org.h2.jdbcx.JdbcDataSource;
+import com.bobocode.util.DbUtil;
 
 import javax.sql.DataSource;
 import java.sql.*;
-import java.util.Date;
 
 public class SimpleJdbcExample {
-    private static String database = "bobocode_db";
-    private static String user = "bobouser";
-    private static String pass = "bobodpass";
     private static DataSource dataSource;
 
     public static void main(String[] args) throws SQLException {
-        initializeDataSource();
-
+        init();
         createMessageTable();
-
         saveSomeMessagesIntoDB();
-
         printMessagesFromDB();
     }
 
-    private static void initializeDataSource() {
-        JdbcDataSource h2DataSource = new JdbcDataSource();
-        h2DataSource.setUser(user);
-        h2DataSource.setPassword(pass);
-        h2DataSource.setUrl(String.format("jdbc:h2:mem:%s;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false", database));
-
-        dataSource = h2DataSource;
+    private static void init(){
+        dataSource = DbUtil.createDefaultInMemoryH2DataSource();
     }
 
     private static void createMessageTable() throws SQLException {

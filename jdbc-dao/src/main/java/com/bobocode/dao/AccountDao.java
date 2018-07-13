@@ -7,7 +7,7 @@ import java.util.List;
 public interface AccountDao {
     void save(Account account);
 
-    Account find(Long id);
+    Account findOne(Long id);
 
     List<Account> findAll();
 

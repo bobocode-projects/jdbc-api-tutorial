@@ -4,11 +4,19 @@ import com.bobocode.dao.AccountDao;
 import com.bobocode.dao.AccountDaoImpl;
 import com.bobocode.util.DbUtil;
 
-public class Main {
-    public static void main(String[] args) {
-        AccountDao accountDao = new AccountDaoImpl(DbUtil.getDataSource());
+import javax.sql.DataSource;
 
+public class Main {
+    private static AccountDao accountDao;
+
+    public static void main(String[] args) {
+        init();
         accountDao.findAll().stream()
                 .forEach(System.out::println);
+    }
+
+    private static void init(){
+        DataSource dataSource = DbUtil.createDefaultPostgresDataSource();
+        accountDao = new AccountDaoImpl(dataSource);
     }
 }

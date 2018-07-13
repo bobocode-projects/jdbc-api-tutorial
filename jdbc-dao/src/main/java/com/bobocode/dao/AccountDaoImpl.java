@@ -61,7 +61,7 @@ public class AccountDaoImpl implements AccountDao {
     }
 
     @Override
-    public Account find(Long id) {
+    public Account findOne(Long id) {
         throw new UnsupportedOperationException("Method is not implemented yet. It's your homework");
     }
 

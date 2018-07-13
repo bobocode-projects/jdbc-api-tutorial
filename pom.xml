@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.bobocode</groupId>
-    <artifactId>jdbc-api</artifactId>
+    <artifactId>jdbc-api-tutorial</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
@@ -13,19 +13,19 @@
         <module>jdbc-dao</module>
         <module>jdbc-util</module>
         <module>jdbc-sql</module>
-        <module>jdbc-sql-stream-task</module>
+        <module>jdbc-account-data</module>
     </modules>
 
     <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.10</maven.compiler.source>
+        <maven.compiler.target>1.10</maven.compiler.target>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.16.10</version>
+            <version>1.18.0</version>
         </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -38,9 +38,9 @@
             <version>1.4.197</version>
         </dependency>
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.4.197</version>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.24</version>
         </dependency>
     </dependencies>
 </project>
