@@ -7,11 +7,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
-@AllArgsConstructor(access = AccessLevel.PUBLIC)
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(of = "email")
+@EqualsAndHashCode(of = "id")
 public class Account {
     private Long id;
     private String firstName;
@@ -19,6 +18,6 @@ public class Account {
     private String email;
     private LocalDate birthday;
     private Gender gender;
-    private LocalDateTime creationDate;
+    private LocalDateTime creationTime;
     private BigDecimal balance = BigDecimal.ZERO;
 }

@@ -15,7 +15,7 @@ import static java.util.stream.Collectors.toList;
 import static java.util.stream.IntStream.range;
 
 public interface Accounts {
-    static Account getAccount(){
+    static Account generateAccount(){
         Fairy fairy = Fairy.create();
         Person person = fairy.person();
         Random random = new Random();
@@ -30,15 +30,15 @@ public interface Accounts {
                 person.getDateOfBirth().getMonthOfYear(),
                 person.getDateOfBirth().getDayOfMonth()));
         fakeAccount.setGender(Gender.valueOf(person.getSex().name()));
-        fakeAccount.setBalance(BigDecimal.valueOf(random.nextInt(200_000)));
-        fakeAccount.setCreationDate(LocalDateTime.now());
+        fakeAccount.setBalance(BigDecimal.valueOf(random.nextInt(200_000)).setScale(2));
+        fakeAccount.setCreationTime(LocalDateTime.now());
 
         return fakeAccount;
     }
 
-    static List<Account> getAccountList(int size){
+    static List<Account> generateAccountList(int size){
         return range(0, size)
-                .mapToObj(i -> getAccount())
+                .mapToObj(i -> generateAccount())
                 .collect(toList());
     }
 }

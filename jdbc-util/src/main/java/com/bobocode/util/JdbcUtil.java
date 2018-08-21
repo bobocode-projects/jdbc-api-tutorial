@@ -5,7 +5,7 @@ import org.postgresql.ds.PGSimpleDataSource;
 
 import javax.sql.DataSource;
 
-public class DbUtil {
+public class JdbcUtil {
     static String DEFAULT_DATABASE_NAME = "bobocode_db";
     static String DEFAULT_USERNAME = "bobouser";
     static String DEFAULT_PASSWORD = "bobodpass";
