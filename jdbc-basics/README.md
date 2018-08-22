@@ -8,7 +8,7 @@ You're supposed to be familiar with SQL and relational databases, have basic kno
 * 
 ##
 ***JDBC API*** is a single part of *JDK* that provides an ability to **connect to a relational database from Java.** 
-Since it's just an API, in order to call a real database, you need a specific implementation of that API for each 
+Since it's just an API, in order to call a real database, you need a specific implementation of that API for each database 
 
 ### Best practices
 * use *try-with-resources* to handle database connection 
