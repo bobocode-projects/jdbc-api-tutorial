@@ -8,7 +8,7 @@ import java.sql.*;
 public class SimpleJdbcExample {
     private static DataSource dataSource;
 
-    public static void main(String[] args) throws SQLException { // exception handling is omitted due to simplicity
+    public static void main(String[] args) throws SQLException { // exception handling is omitted
         init();
         createMessageTable();
         saveSomeMessagesIntoDB();
@@ -36,15 +36,22 @@ public class SimpleJdbcExample {
 
     private static void saveSomeMessagesIntoDB() throws SQLException {
         try (Connection connection = dataSource.getConnection()) {
-            PreparedStatement insertStatement = connection.prepareStatement("INSERT INTO message(body) VALUES (?)");
-
-            insertStatement.setString(1, "Hello!");
-            insertStatement.executeUpdate();
-
-            insertStatement.setString(1, "How are you?");
-            insertStatement.executeUpdate();
+            String insertQuery = getInsertMessageSql();
+            PreparedStatement insertStatement = connection.prepareStatement(insertQuery);
+            insertSomeMessages(insertStatement);
         }
+    }
 
+    private static void insertSomeMessages(PreparedStatement insertStatement) throws SQLException {
+        insertStatement.setString(1, "Hello!");
+        insertStatement.executeUpdate();
+
+        insertStatement.setString(1, "How are you?");
+        insertStatement.executeUpdate();
+    }
+
+    private static String getInsertMessageSql() {
+        return "INSERT INTO message(body) VALUES (?)";
     }
 
     private static void printMessagesFromDB() throws SQLException {
