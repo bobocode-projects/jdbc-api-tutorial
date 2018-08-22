@@ -22,8 +22,8 @@ public class SimpleJdbcExample {
     private static void createMessageTable() throws SQLException {
         try (Connection connection = dataSource.getConnection()) {
             Statement statement = connection.createStatement();
-            String sql = getCreateMessageTablesSql();
-            statement.execute(sql);
+            String createMessageTableQuery = getCreateMessageTablesSql();
+            statement.execute(createMessageTableQuery);
         }
     }
 
@@ -36,13 +36,13 @@ public class SimpleJdbcExample {
 
     private static void saveSomeMessagesIntoDB() throws SQLException {
         try (Connection connection = dataSource.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO message(body) VALUES (?)");
+            PreparedStatement insertStatement = connection.prepareStatement("INSERT INTO message(body) VALUES (?)");
 
-            statement.setString(1, "Hello!");
-            statement.executeUpdate();
+            insertStatement.setString(1, "Hello!");
+            insertStatement.executeUpdate();
 
-            statement.setString(1, "How are you?");
-            statement.executeUpdate();
+            insertStatement.setString(1, "How are you?");
+            insertStatement.executeUpdate();
         }
 
     }
@@ -51,7 +51,7 @@ public class SimpleJdbcExample {
         //try-with-resource will automatically close Connection resource
         try (Connection connection = dataSource.getConnection()) {
             Statement statement = connection.createStatement();
-            String selectMessagesQuery = getSelectAllMessgesSql();
+            String selectMessagesQuery = getSelectAllMessagesSql();
             ResultSet resultSet = statement.executeQuery(selectMessagesQuery);
             printAllMessages(resultSet);
         }
@@ -65,7 +65,7 @@ public class SimpleJdbcExample {
         }
     }
 
-    private static String getSelectAllMessgesSql() {
+    private static String getSelectAllMessagesSql() {
         return "SELECT * FROM message";
     }
 }

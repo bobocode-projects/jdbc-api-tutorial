@@ -45,7 +45,7 @@ public class AccountDaoTest {
                     "  balance       DECIMAL(19, 4),\n" +
                     "  creation_time TIMESTAMP NOT NULL DEFAULT now(),\n" +
                     "\n" +
-                    "  CONSTRAINT account_pk PRIMARY KEY (id),\n" +
+                    "  CONSTRAINT account_pk PRIMARY KEY (id)\n" +
                     ");\n" +
                     "\n");
         }

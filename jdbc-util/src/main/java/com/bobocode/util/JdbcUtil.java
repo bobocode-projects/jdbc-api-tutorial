@@ -4,6 +4,7 @@ import org.h2.jdbcx.JdbcDataSource;
 import org.postgresql.ds.PGSimpleDataSource;
 
 import javax.sql.DataSource;
+import java.util.Map;
 
 public class JdbcUtil {
     static String DEFAULT_DATABASE_NAME = "bobocode_db";
@@ -11,7 +12,7 @@ public class JdbcUtil {
     static String DEFAULT_PASSWORD = "bobodpass";
 
     public static DataSource createDefaultInMemoryH2DataSource() {
-        String url = formH2ImMemoryDbUrl(DEFAULT_DATABASE_NAME);
+        String url = formatH2ImMemoryDbUrl(DEFAULT_DATABASE_NAME);
         return createInMemoryH2DataSource(url, DEFAULT_USERNAME, DEFAULT_PASSWORD);
     }
 
@@ -24,12 +25,12 @@ public class JdbcUtil {
         return h2DataSource;
     }
 
-    private static String formH2ImMemoryDbUrl(String databaseName) {
+    private static String formatH2ImMemoryDbUrl(String databaseName) {
         return String.format("jdbc:h2:mem:%s;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false", databaseName);
     }
 
     public static DataSource createDefaultPostgresDataSource() {
-        String url = formPostgresDbUrl(DEFAULT_DATABASE_NAME);
+        String url = formatPostgresDbUrl(DEFAULT_DATABASE_NAME);
         return createPostgresDataSource(url, DEFAULT_USERNAME, DEFAULT_PASSWORD);
     }
 
@@ -41,8 +42,15 @@ public class JdbcUtil {
         return dataSource;
     }
 
-    private static String formPostgresDbUrl(String databaseName) {
+    private static String formatPostgresDbUrl(String databaseName) {
         return String.format("jdbc:postgresql://localhost:5432/%s", databaseName);
+    }
+
+    public static Map<String, String> getInMemoryDbPropertiesMap() {
+        return Map.of(
+                "url", String.format("jdbc:h2:mem:%s", DEFAULT_DATABASE_NAME),
+                "username", DEFAULT_USERNAME,
+                "password", DEFAULT_PASSWORD);
     }
 
 
