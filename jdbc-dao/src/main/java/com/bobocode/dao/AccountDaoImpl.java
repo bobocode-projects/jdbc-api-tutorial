@@ -52,7 +52,7 @@ public class AccountDaoImpl implements AccountDao {
     }
 
     private String getInsertAccountSql() {
-        return "INSERT INTO account(first_name, last_name, email, birthday, balance) VALUES(?,?,?,?,?);";
+        throw new UnsupportedOperationException("It's your task to write a proper SQL statement");
     }
 
     private void executeUpdate(PreparedStatement insertStatement, String errorMessage) throws SQLException {
@@ -100,7 +100,7 @@ public class AccountDaoImpl implements AccountDao {
     }
 
     private String getSelectByIdSlq() {
-        return "SELECT * FROM account WHERE account.id = ?;";
+        throw new UnsupportedOperationException("It's your task to write a proper SQL statement");
     }
 
     private Account parseRow(ResultSet rs) throws SQLException {
@@ -128,7 +128,7 @@ public class AccountDaoImpl implements AccountDao {
     }
 
     private String getSelectAllSql() {
-        return "SELECT * FROM account;";
+        throw new UnsupportedOperationException("It's your task to write a proper SQL statement");
     }
 
     @Override
@@ -152,7 +152,7 @@ public class AccountDaoImpl implements AccountDao {
     }
 
     private String getUpdateAccountSql() {
-        return "UPDATE account SET first_name =?, last_name = ?, email = ?, birthday = ?, balance = ?;";
+        throw new UnsupportedOperationException("It's your task to write a proper SQL statement");
     }
 
     private List<Account> collectToList(ResultSet rs) throws SQLException {

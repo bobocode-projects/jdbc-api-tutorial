@@ -28,10 +28,7 @@ public class SimpleJdbcExample {
     }
 
     private static String getCreateMessageTablesSql() {
-        return "CREATE TABLE message(" +
-                "body VARCHAR(255)," +
-                "creation_date TIMESTAMP DEFAULT now()" +
-                ");";
+        throw new UnsupportedOperationException("It's your task to write a proper SQL statement");
     }
 
     private static void saveSomeMessagesIntoDB() throws SQLException {
@@ -51,7 +48,7 @@ public class SimpleJdbcExample {
     }
 
     private static String getInsertMessageSql() {
-        return "INSERT INTO message(body) VALUES (?)";
+        throw new UnsupportedOperationException("It's your task to write a proper SQL statement");
     }
 
     private static void printMessagesFromDB() throws SQLException {
@@ -73,6 +70,6 @@ public class SimpleJdbcExample {
     }
 
     private static String getSelectAllMessagesSql() {
-        return "SELECT * FROM message";
+        throw new UnsupportedOperationException("It's your task to write a proper SQL statement");
     }
 }
