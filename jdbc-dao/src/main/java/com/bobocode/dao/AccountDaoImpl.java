@@ -43,12 +43,7 @@ public class AccountDaoImpl implements AccountDao {
 
     private PreparedStatement fillStatementWithAccountData(PreparedStatement insertStatement, Account account)
             throws SQLException {
-        insertStatement.setString(1, account.getFirstName());
-        insertStatement.setString(2, account.getLastName());
-        insertStatement.setString(3, account.getEmail());
-        insertStatement.setDate(4, Date.valueOf(account.getBirthday()));
-        insertStatement.setBigDecimal(5, account.getBalance());
-        return insertStatement;
+        throw new UnsupportedOperationException("It's your task to set all parameters and make it work"); // todo
     }
 
     private String getInsertAccountSql() {
@@ -74,11 +69,7 @@ public class AccountDaoImpl implements AccountDao {
 
     @Override
     public Account findOne(Long id) {
-        try (Connection connection = dataSource.getConnection()) {
-            return findAccountById(id, connection);
-        } catch (SQLException e) {
-            throw new DaoOperationException(String.format("Cannot find Account by id = %d", id), e);
-        }
+        throw new UnsupportedOperationException("It's your task to get a connection, call helper method and handle exception");
     }
 
     private Account findAccountById(Long id, Connection connection) throws SQLException {
@@ -118,10 +109,7 @@ public class AccountDaoImpl implements AccountDao {
     @Override
     public List<Account> findAll() {
         try (Connection connection = dataSource.getConnection()) {
-            Statement statement = connection.createStatement();
-            String selectAllQuery = getSelectAllSql();
-            ResultSet rs = statement.executeQuery(selectAllQuery);
-            return collectToList(rs);
+            throw new UnsupportedOperationException("It's your task to create a proper statement, execute query and return result"); // todo
         } catch (SQLException e) {
             throw new DaoOperationException(e.getMessage());
         }
