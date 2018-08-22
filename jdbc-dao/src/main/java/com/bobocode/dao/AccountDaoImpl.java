@@ -119,11 +119,16 @@ public class AccountDaoImpl implements AccountDao {
     public List<Account> findAll() {
         try (Connection connection = dataSource.getConnection()) {
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM account;");
+            String selectAllQuery = getSelectAllSql();
+            ResultSet rs = statement.executeQuery(selectAllQuery);
             return collectToList(rs);
         } catch (SQLException e) {
             throw new DaoOperationException(e.getMessage());
         }
+    }
+
+    private String getSelectAllSql() {
+        return "SELECT * FROM account;";
     }
 
     @Override
