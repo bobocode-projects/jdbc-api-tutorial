@@ -145,7 +145,9 @@ public class AccountDaoImpl implements AccountDao {
         try {
             String updateQuery = getUpdateAccountSql();
             PreparedStatement updateStatement = connection.prepareStatement(updateQuery);
-            return fillStatementWithAccountData(updateStatement, account);
+            fillStatementWithAccountData(updateStatement, account);
+            updateStatement.setLong(6, account.getId());
+            return updateStatement;
         } catch (SQLException e) {
             throw new DaoOperationException(String.format("Cannot prepare update statement for account id = %d", account.getId()), e);
         }
