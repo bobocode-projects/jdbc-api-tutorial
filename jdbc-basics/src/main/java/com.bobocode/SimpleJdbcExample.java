@@ -28,10 +28,7 @@ public class SimpleJdbcExample {
     }
 
     private static String getCreateMessageTablesSql() {
-        return "CREATE TABLE message(" +
-                "body VARCHAR(255)," +
-                "creation_date TIMESTAMP DEFAULT now()" +
-                ");";
+        return "CREATE TABLE message (body varchar(255) not null, creationtime timestamp default now() not null)";
     }
 
     private static void saveSomeMessagesIntoDB() throws SQLException {
@@ -51,7 +48,7 @@ public class SimpleJdbcExample {
     }
 
     private static String getInsertMessageSql() {
-        return "INSERT INTO message(body) VALUES (?)";
+        return "insert into message (body) values (?)";
     }
 
     private static void printMessagesFromDB() throws SQLException {
@@ -73,6 +70,6 @@ public class SimpleJdbcExample {
     }
 
     private static String getSelectAllMessagesSql() {
-        return "SELECT * FROM message";
+        return "select * from  message";
     }
 }
