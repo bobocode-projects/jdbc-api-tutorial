@@ -6,7 +6,7 @@ The tutorial on SQL BATCH INSERT using JDBC API
 You're supposed to be familiar with SQL and relational databases, and be able to write Java code. 
 ##
 
-**What is a batch insert? ** It's an operation that allows to **insert more than one row using one INSERT statement.** :star:
+**What is a batch insert?** It's an operation that allows to **insert more than one row using one INSERT statement.** :star:
 
 #### SQL
 A typical insert sql query looks like this: `INSERT INTO products(name, producer) VALUES('Snickers', 'Mars Inc');`
@@ -18,7 +18,9 @@ the network from the server to the database, and it needs to do it 100 000 times
 
 In order to make such operation more efficient relational database and SQL provide an ability to **insert multiple rows 
 in one INSERT statement.** :thumbsup: The sql query looks like the following:
+
 `INSERT INTO products(name, producer) VALUES ('Snickers', 'Mars Inc'), ('Fanta', 'The Coca-Cola company'), ('Bueno', 'Ferrero S.p.A.');`
+
 This approach allow to tremendously reduce the amount of database calls :+1:
 
 Using batch INSERT you can split all products, and insert them using batches. In case a **batch size is 1000**, the **number
@@ -50,6 +52,11 @@ for (int i = 0; i < PRODUCTS_NUMBER; i++) {
     if (i % BATCH_SIZE == 0) { 
         insertStatement.executeBatch(); // calls the database
     }       
+}
+
+// in case batch in not empty at the end of the for loop
+if (i % BATCH_SIZE == 0) { 
+    insertStatement.executeBatch(); // calls the database
 }
 ```
 
