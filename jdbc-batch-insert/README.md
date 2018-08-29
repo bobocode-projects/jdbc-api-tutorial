@@ -57,13 +57,13 @@ for (int i = 0; i < PRODUCTS_NUMBER; i++) {
     preparedStatemnt.addBatch(); // doesn't call the database
     
     if (i % BATCH_SIZE == 0) { 
-        insertStatement.executeBatch(); // calls the database
+        preparedStatemnt.executeBatch(); // calls the database
     }       
 }
 
 // in case batch in not empty at the end of the for loop
 if (i % BATCH_SIZE == 0) { 
-    insertStatement.executeBatch(); // calls the database
+    preparedStatemnt.executeBatch(); // calls the database
 }
 ```
 
