@@ -42,6 +42,7 @@ public class AccountDaoTest {
                     "  last_name     VARCHAR(255) NOT NULL,\n" +
                     "  email         VARCHAR(255) NOT NULL,\n" +
                     "  birthday      TIMESTAMP NOT NULL,\n" +
+                    "  sex      TINYINT NOT NULL DEFAULT 0 CHECK (sex >= 0 AND sex <=2) ,\n" +
                     "  balance       DECIMAL(19, 4),\n" +
                     "  creation_time TIMESTAMP NOT NULL DEFAULT now(),\n" +
                     "\n" +

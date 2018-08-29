@@ -2,6 +2,7 @@ package com.bobocode.dao;
 
 import com.bobocode.exception.DaoOperationException;
 import com.bobocode.model.Account;
+import com.bobocode.model.Gender;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -47,12 +48,13 @@ public class AccountDaoImpl implements AccountDao {
         insertStatement.setString(2, account.getLastName());
         insertStatement.setString(3, account.getEmail());
         insertStatement.setDate(4, Date.valueOf(account.getBirthday()));
-        insertStatement.setBigDecimal(5, account.getBalance());
+        insertStatement.setInt(5, account.getGender().getValue());
+        insertStatement.setBigDecimal(6, account.getBalance());
         return insertStatement;
     }
 
     private String getInsertAccountSql() {
-        return "INSERT INTO account(first_name, last_name, email, birthday, balance) VALUES(?,?,?,?,?);";
+        return "INSERT INTO account(first_name, last_name, email, birthday, sex, balance) VALUES(?,?,?,?,?,?);";
     }
 
     private void executeUpdate(PreparedStatement insertStatement, String errorMessage) throws SQLException {
@@ -110,8 +112,9 @@ public class AccountDaoImpl implements AccountDao {
         account.setLastName(rs.getString(3));
         account.setEmail(rs.getString(4));
         account.setBirthday(rs.getDate(5).toLocalDate());
-        account.setBalance(rs.getBigDecimal(6));
-        account.setCreationTime(rs.getTimestamp(7).toLocalDateTime());
+        account.setGender(Gender.values()[rs.getInt(6)]);
+        account.setBalance(rs.getBigDecimal(7));
+        account.setCreationTime(rs.getTimestamp(8).toLocalDateTime());
         return account;
     }
 
@@ -146,7 +149,7 @@ public class AccountDaoImpl implements AccountDao {
             String updateQuery = getUpdateAccountSql();
             PreparedStatement updateStatement = connection.prepareStatement(updateQuery);
             fillStatementWithAccountData(updateStatement, account);
-            updateStatement.setLong(6, account.getId());
+            updateStatement.setLong(7, account.getId());
             return updateStatement;
         } catch (SQLException e) {
             throw new DaoOperationException(String.format("Cannot prepare update statement for account id = %d", account.getId()), e);
@@ -154,7 +157,7 @@ public class AccountDaoImpl implements AccountDao {
     }
 
     private String getUpdateAccountSql() {
-        return "UPDATE account SET first_name =?, last_name = ?, email = ?, birthday = ?, balance = ? WHERE id = ?;";
+        return "UPDATE account SET first_name =?, last_name = ?, email = ?, birthday = ?, sex = ?, balance = ? WHERE id = ?;";
     }
 
     private List<Account> collectToList(ResultSet rs) throws SQLException {
