@@ -3,3 +3,4 @@
 The list of tutorials on JDBC API features and SQL
 * [JDBC API Basics](https://github.com/bobocode-projects/jdbc-api-tutorial/tree/master/jdbc-basics)
 * [Data Access Objects (DAO)](https://github.com/bobocode-projects/jdbc-api-tutorial/tree/master/jdbc-dao)
+* [Batch Insert with JDBC API](https://github.com/bobocode-projects/jdbc-api-tutorial/tree/master/jdbc-batch-insert)
