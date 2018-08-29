@@ -13,9 +13,9 @@ A typical insert sql query looks like this:
 
 `INSERT INTO products(name, producer) VALUES('Snickers', 'Mars Inc');`
 
-We usually perform one INSERT statement (query) to store one row. However, in some cases such approach is not efficient. :-1:
+We usually perform one INSERT statement to store one row. However, in some cases such approach is not efficient :-1:
 
-Suppose you need to store large amount of products at the same time. Like you need to store 100 000 products. It means 
+**Suppose you need to store large amount of products** at the same time. Like you need to store 100 000 products. It means 
 that you need to call database 100 000 which is super inefficient, because each SQL query needs to at least go through 
 the network from the server to the database, and it needs to do it 100 000 times :scream_cat:
 
