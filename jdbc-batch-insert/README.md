@@ -11,7 +11,9 @@ You're supposed to be familiar with SQL and relational databases, and be able to
 #### SQL
 A typical insert sql query looks like this: 
 
-`INSERT INTO products(name, producer) VALUES('Snickers', 'Mars Inc');`
+```sql
+INSERT INTO products(name, producer) VALUES('Snickers', 'Mars Inc');
+```
 
 We usually perform one INSERT statement to store one row. However, in some cases such approach is not efficient :-1:
 
@@ -22,7 +24,9 @@ the network from the server to the database, and it needs to do it 100 000 times
 In order to make such operation more efficient relational database and SQL provide an ability to **insert multiple rows 
 in one INSERT statement.** :thumbsup: The sql query looks like the following:
 
-`INSERT INTO products(name, producer) VALUES ('Snickers', 'Mars Inc'), ('Fanta', 'The Coca-Cola company'), ('Bueno', 'Ferrero S.p.A.');`
+```sql
+INSERT INTO products(name, producer) VALUES ('Snickers', 'Mars Inc'), ('Fanta', 'The Coca-Cola company'), ('Bueno', 'Ferrero S.p.A.');
+```
 
 This approach allow to tremendously reduce the amount of database calls :+1:
 
