@@ -7,7 +7,7 @@ You're supposed to be familiar with SQL and relational databases, have basic kno
 ##
 
 #### SQL
-Relational databases provide a simple API to handle transactions. There are three main self-descriptive SQL commands:
+Relational databases provide different commands to handle transactions. For isntance, PostgreSQL provides three self-descriptive SQL commands:
 
 ```sql
 START TRANSACTION
