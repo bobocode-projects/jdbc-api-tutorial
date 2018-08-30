@@ -12,9 +12,9 @@
         <module>jdbc-basics</module>
         <module>jdbc-dao</module>
         <module>jdbc-util</module>
-        <module>jdbc-sql</module>
         <module>jdbc-account-data</module>
         <module>jdbc-batch-insert</module>
+        <module>jdbc-transaction</module>
     </modules>
 
     <properties>
@@ -52,6 +52,11 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.8</version>
+        </dependency>
+        <dependency>
+            <groupId>net.ttddyy</groupId>
+            <artifactId>datasource-proxy</artifactId>
+            <version>1.4.9</version>
         </dependency>
     </dependencies>
 </project>
