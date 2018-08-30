@@ -12,8 +12,8 @@ Since it's just an API, in order to call a real database, you need a specific im
 The basic flow of working with database is **getting connection, performing SQL query, and getting results.**
 Here's the list of most important *JDBC API* classes needed for calling db and getting results:
 
- JDBC API class | Description
-          --- | --- 
+JDBC API class | Description
+--- | --- 
  `DataSource` | Represents a concrete database server  
  `Connection` | Represents a real physical network connection to the db 
  `Statement`  | Represents a SQL query
