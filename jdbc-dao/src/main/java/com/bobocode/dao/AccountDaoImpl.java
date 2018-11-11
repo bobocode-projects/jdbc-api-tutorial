@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AccountDaoImpl implements AccountDao {
+    private final static String INSERT_ACCOUNT_SQL = "INSERT INTO account(first_name, last_name, email, birthday, sex, balance) VALUES(?,?,?,?,?,?);";
+    private final static String SELECT_ACCOUNT_BY_ID_SQL = "SELECT * FROM account WHERE account.id = ?;";
+    private final static String SELECT_ALL_ACCOUNTS_SQL = "SELECT * FROM account;";
+    private final static String UPDATE_ACCOUNT_SQL = "UPDATE account SET first_name =?, last_name = ?, email = ?, birthday = ?, sex = ?, balance = ? WHERE id = ?;";
     private DataSource dataSource;
 
     public AccountDaoImpl(DataSource dataSource) {
@@ -34,8 +38,7 @@ public class AccountDaoImpl implements AccountDao {
 
     private PreparedStatement prepareInsertStatement(Connection connection, Account account) {
         try {
-            String insertQuery = getInsertAccountSql();
-            PreparedStatement insertStatement = connection.prepareStatement(insertQuery, PreparedStatement.RETURN_GENERATED_KEYS);
+            PreparedStatement insertStatement = connection.prepareStatement(INSERT_ACCOUNT_SQL, PreparedStatement.RETURN_GENERATED_KEYS);
             return fillStatementWithAccountData(insertStatement, account);
         } catch (SQLException e) {
             throw new DaoOperationException("Cannot prepare statement to insert account", e);
@@ -51,10 +54,6 @@ public class AccountDaoImpl implements AccountDao {
         insertStatement.setInt(5, account.getGender().getValue());
         insertStatement.setBigDecimal(6, account.getBalance());
         return insertStatement;
-    }
-
-    private String getInsertAccountSql() {
-        return "INSERT INTO account(first_name, last_name, email, birthday, sex, balance) VALUES(?,?,?,?,?,?);";
     }
 
     private void executeUpdate(PreparedStatement insertStatement, String errorMessage) throws SQLException {
@@ -92,17 +91,12 @@ public class AccountDaoImpl implements AccountDao {
 
     private PreparedStatement prepareSelectByIdStatement(Long id, Connection connection) {
         try {
-            String selectByIdQuery = getSelectByIdSlq();
-            PreparedStatement selectByIdStatement = connection.prepareStatement(selectByIdQuery);
+            PreparedStatement selectByIdStatement = connection.prepareStatement(SELECT_ACCOUNT_BY_ID_SQL);
             selectByIdStatement.setLong(1, id);
             return selectByIdStatement;
         } catch (SQLException e) {
             throw new DaoOperationException("Cannot prepare statement to select account by id", e);
         }
-    }
-
-    private String getSelectByIdSlq() {
-        return "SELECT * FROM account WHERE account.id = ?;";
     }
 
     private Account parseRow(ResultSet rs) throws SQLException {
@@ -122,16 +116,11 @@ public class AccountDaoImpl implements AccountDao {
     public List<Account> findAll() {
         try (Connection connection = dataSource.getConnection()) {
             Statement statement = connection.createStatement();
-            String selectAllQuery = getSelectAllSql();
-            ResultSet rs = statement.executeQuery(selectAllQuery);
+            ResultSet rs = statement.executeQuery(SELECT_ALL_ACCOUNTS_SQL);
             return collectToList(rs);
         } catch (SQLException e) {
             throw new DaoOperationException(e.getMessage());
         }
-    }
-
-    private String getSelectAllSql() {
-        return "SELECT * FROM account;";
     }
 
     @Override
@@ -146,18 +135,13 @@ public class AccountDaoImpl implements AccountDao {
 
     private PreparedStatement prepareUpdateStatement(Account account, Connection connection) {
         try {
-            String updateQuery = getUpdateAccountSql();
-            PreparedStatement updateStatement = connection.prepareStatement(updateQuery);
+            PreparedStatement updateStatement = connection.prepareStatement(UPDATE_ACCOUNT_SQL);
             fillStatementWithAccountData(updateStatement, account);
             updateStatement.setLong(7, account.getId());
             return updateStatement;
         } catch (SQLException e) {
             throw new DaoOperationException(String.format("Cannot prepare update statement for account id = %d", account.getId()), e);
         }
-    }
-
-    private String getUpdateAccountSql() {
-        return "UPDATE account SET first_name =?, last_name = ?, email = ?, birthday = ?, sex = ?, balance = ? WHERE id = ?;";
     }
 
     private List<Account> collectToList(ResultSet rs) throws SQLException {
