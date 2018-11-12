@@ -6,6 +6,14 @@ import javax.sql.DataSource;
 import java.sql.*;
 
 public class SimpleJdbcExample {
+    private static final String CREATE_TABLE_SQL = "CREATE TABLE message(" +
+            "body VARCHAR(255)," +
+            "creation_date TIMESTAMP DEFAULT now()" +
+            ");";
+    private static final String INSERT_SQL = "INSERT INTO message(body) VALUES (?)";
+    private static final String SELECT_ALL_SQL = "SELECT * FROM message";
+
+
     private static DataSource dataSource;
 
     public static void main(String[] args) throws SQLException { // exception handling is omitted
@@ -22,22 +30,14 @@ public class SimpleJdbcExample {
     private static void createMessageTable() throws SQLException {
         try (Connection connection = dataSource.getConnection()) {
             Statement statement = connection.createStatement();
-            String createMessageTableQuery = getCreateMessageTablesSql();
-            statement.execute(createMessageTableQuery);
+            statement.execute(CREATE_TABLE_SQL);
         }
-    }
 
-    private static String getCreateMessageTablesSql() {
-        return "CREATE TABLE message(" +
-                "body VARCHAR(255)," +
-                "creation_date TIMESTAMP DEFAULT now()" +
-                ");";
     }
 
     private static void saveSomeMessagesIntoDB() throws SQLException {
         try (Connection connection = dataSource.getConnection()) {
-            String insertQuery = getInsertMessageSql();
-            PreparedStatement insertStatement = connection.prepareStatement(insertQuery);
+            PreparedStatement insertStatement = connection.prepareStatement(INSERT_SQL);
             insertSomeMessages(insertStatement);
         }
     }
@@ -50,16 +50,11 @@ public class SimpleJdbcExample {
         insertStatement.executeUpdate();
     }
 
-    private static String getInsertMessageSql() {
-        return "INSERT INTO message(body) VALUES (?)";
-    }
-
     private static void printMessagesFromDB() throws SQLException {
         //try-with-resource will automatically close Connection resource
         try (Connection connection = dataSource.getConnection()) {
             Statement statement = connection.createStatement();
-            String selectMessagesQuery = getSelectAllMessagesSql();
-            ResultSet resultSet = statement.executeQuery(selectMessagesQuery);
+            ResultSet resultSet = statement.executeQuery(SELECT_ALL_SQL);
             printAllMessages(resultSet);
         }
     }
@@ -70,9 +65,5 @@ public class SimpleJdbcExample {
             Timestamp timestamp = resultSet.getTimestamp(2);
             System.out.println(" - " + messageText + " [" + timestamp + "]");
         }
-    }
-
-    private static String getSelectAllMessagesSql() {
-        return "SELECT * FROM message";
     }
 }
